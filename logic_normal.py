@@ -35,6 +35,7 @@ class LogicNormal(object):
     @celery.task
     def scheduler_function():
         try:
+            logger.debug("파일정리 시작!")
             source_path = ModelSetting.get('source_path')
             download_path = ModelSetting.get('download_path')
             nodate_path = ModelSetting.get('nodate_path')
@@ -88,7 +89,7 @@ class LogicNormal(object):
           exclude = ['@eaDir']
           #이동할 파일 조회(파일, 폴더내 파일)
           fileList = os.listdir(FILE_PATH)
-       
+          
           for file in fileList:
              mvBool = True
              for ex in exclude:
@@ -153,6 +154,9 @@ class LogicNormal(object):
                    if not delete_path == '':
                       LogicNormal.remove_dir(FILE_PATH+delete_path)
                 #폴더 처리 완료
+                #시놀로지 video station 용 synoindex
+                os.system('/usr/syno/bin/synoindex -a %s', directory)   #생성한 날짜 폴더만
+                #os.system('/usr/syno/bin/synoindex -R video')   #전체
        else:
           logger.debug("폴더 존재하지 않으므로 진행하지 않습니다.")
           logger.debug("라이브러리경로 : %s", ROOT_PATH)
