@@ -128,7 +128,7 @@ class LogicNormal(object):
                    #logger.debug("delete_path : %s", delete_path)
 	           #while start
                    while True:
-                      filepath = LogicNormal.get_lastfile(file)
+                      filepath = LogicNormal.get_lastfile(FILE_PATH+file)
                       if filepath == '':
                          break;
                       file_info = os.path.split(filepath)
