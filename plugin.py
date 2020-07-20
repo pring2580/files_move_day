@@ -44,7 +44,7 @@ menu = {
 
 plugin_info = {
     'version' : '0.1',
-    'name' : 'file_process_day',
+    'name' : 'files_move_day',
     'category_name' : 'fileprocess',
     'developer' : 'pring',
     'description' : '파일정리(요일별)',
