@@ -65,7 +65,7 @@ class LogicNormal(object):
        FILE_PATH = download_path
        NO_DATE_PATH = nodate_path
        
-       #폴더 존재있는 경우만 진행
+       #필수 폴더 존재하는 경우만 진행
        if os.path.isdir(ROOT_PATH) and os.path.isdir(FILE_PATH) and os.path.isdir(NO_DATE_PATH):
           now = datetime.datetime.now()
           nowDate = now.strftime('%y%m%d')
@@ -122,9 +122,9 @@ class LogicNormal(object):
                       shutil.move(FILE_PATH+file, NO_DATE_PATH+file)
                       logger.debug("### 파일이동처리 완료 ###")
                 #폴더처리 시작
-                elif os.path.isdir(file):
+                elif os.path.isdir(FILE_PATH+file):
                    #폴더내 파일이동 후 삭제할 폴더
-                   delete_path = file
+                   delete_path = FILE_PATH+file
                    #logger.debug("delete_path : %s", delete_path)
 	           #while start
                    while True:
@@ -135,11 +135,13 @@ class LogicNormal(object):
                       file_name = file_info[1]
                       fileDate = file_name.split('.')[2]
                       #날짜에 해당하는 폴더 있으면 이동
-                      checkWeek = "("+LogicNormal.get_whichday(fileDate)+")"
-                      #logger.debug("checkWeek : %s", checkWeek)
-                      moveDir = fileDate+checkWeek
-                      #logger.debug("moveDir : %s", moveDir)
-                      if os.path.isdir(ROOT_PATH+moveDir): 
+                      moveDir = ''
+                      if len(fileDate) == 6:
+                         checkWeek = "("+LogicNormal.get_whichday(fileDate)+")"
+                         #logger.debug("checkWeek : %s", checkWeek)
+                         moveDir = fileDate+checkWeek
+                         #logger.debug("moveDir : %s", moveDir)
+                      if moveDir != '':
                          logger.debug("### 파일이동처리 시작 ###")
                          logger.debug("이동할 파일명 : %s", file_name)
                          logger.debug("이동할 경로 : %s", moveDir)
@@ -152,7 +154,7 @@ class LogicNormal(object):
                      #while end
                    #폴더 삭제
                    if not delete_path == '':
-                      LogicNormal.remove_dir(FILE_PATH+delete_path)
+                      LogicNormal.remove_dir(delete_path)
                 #폴더 처리 완료
                 #시놀로지 video station 용 synoindex
                 os.system('/usr/syno/bin/synoindex -a %s', directory)   #생성한 날짜 폴더만
