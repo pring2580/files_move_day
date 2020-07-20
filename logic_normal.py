@@ -29,13 +29,15 @@ from .model import ModelSetting, ModelItem
 import cgitb
 cgitb.enable(format='text')
 
-class LogicNormal(object):
+#synoindex 호출용
+from urlparse import urlparse
 
+class LogicNormal(object):
     @staticmethod
     @celery.task
     def scheduler_function():
         try:
-            logger.debug("파일정리 시작!")
+            #logger.debug("파일정리 시작!")
             source_path = ModelSetting.get('source_path')
             download_path = ModelSetting.get('download_path')
             nodate_path = ModelSetting.get('nodate_path')
@@ -156,14 +158,13 @@ class LogicNormal(object):
                    if not delete_path == '':
                       LogicNormal.remove_dir(delete_path)
                 #폴더 처리 완료
-                #시놀로지 video station 용 synoindex
-                os.system('/usr/syno/bin/synoindex -a %s', directory)   #생성한 날짜 폴더만
-                #os.system('/usr/syno/bin/synoindex -R video')   #전체
        else:
           logger.debug("폴더 존재하지 않으므로 진행하지 않습니다.")
           logger.debug("라이브러리경로 : %s", ROOT_PATH)
           logger.debug("다운로드 경로 : %s", FILE_PATH)
           logger.debug("날짜없는파일 처리 경로 : %s", NO_DATE_PATH)
+       
+       
        logger.debug("=========== SCRIPT END ===========")
 
     @staticmethod

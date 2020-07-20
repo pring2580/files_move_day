@@ -31,6 +31,7 @@ class Logic(object):
 	'source_path' : '',
 	'download_path' : '',
 	'nodate_path' : '',
+	'synoindex_path' : '',
         'schedulerInterval' : ''
     }
 
@@ -132,7 +133,6 @@ class Logic(object):
                     Logic.scheduler_function()
                 threading.Thread(target=func, args=()).start()
                 ret = 'thread'
-
         except Exception as e:
             logger.error('Exception:%s', e)
             logger.error(traceback.format_exc())
