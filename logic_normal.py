@@ -174,7 +174,7 @@ class LogicNormal(object):
     def get_lastfile(file):
        #파일이 나올때까지 반복
        full_filename = ""
-       dirname = FILE_PATH+file
+       dirname = file
        for (path, dir, files) in os.walk(dirname):
           for filename in files:
              #synology 썸네일폴더 제외
