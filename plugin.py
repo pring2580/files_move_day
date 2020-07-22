@@ -35,7 +35,7 @@ from .logic_normal import LogicNormal
 blueprint = Blueprint(package_name, package_name, url_prefix='/%s' %  package_name, template_folder=os.path.join(os.path.dirname(__file__), 'templates'))
 
 menu = {
-    'main' : [package_name, '파일정리(요일별)'],
+    'main' : [package_name, '파일정리(날짜별)'],
     'sub' : [
         ['setting', '설정'], ['log', '로그']
     ],
