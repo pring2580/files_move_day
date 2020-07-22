@@ -58,17 +58,17 @@ class LogicNormal(object):
            if not os.path.isdir(source_path): 
                os.makedirs(source_path)
        except OSError:
-           log("Error: Creating source_path." + source_path)
+           logger.error("Error: Creating source_path." + source_path)
        try:
            if not os.path.isdir(download_path): 
                os.makedirs(download_path)
        except OSError:
-           log("Error: Creating download_path." + download_path)
+           logger.error("Error: Creating download_path." + download_path)
        try:
            if not os.path.isdir(noname_path): 
                os.makedirs(noname_path)
        except OSError:
-           log("Error: Creating noname_path." + noname_path)
+           logger.error("Error: Creating noname_path." + noname_path)
 
        #전달받은 path 경로에 / 없는 경우 예외처리
        if source_path.rfind("/")+1 != len(source_path):
