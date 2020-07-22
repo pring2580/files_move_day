@@ -53,6 +53,23 @@ class LogicNormal(object):
     @staticmethod
     def file_move(source_path, download_path, nodate_path):
        logger.debug("=========== SCRIPT START ===========")
+       #초기 폴더 생성
+       try:
+           if not os.path.isdir(source_path): 
+               os.makedirs(source_path)
+       except OSError:
+           log("Error: Creating source_path." + source_path)
+       try:
+           if not os.path.isdir(download_path): 
+               os.makedirs(download_path)
+       except OSError:
+           log("Error: Creating download_path." + download_path)
+       try:
+           if not os.path.isdir(noname_path): 
+               os.makedirs(noname_path)
+       except OSError:
+           log("Error: Creating noname_path." + noname_path)
+
        #전달받은 path 경로에 / 없는 경우 예외처리
        if source_path.rfind("/")+1 != len(source_path):
           source_path = source_path+'/'
