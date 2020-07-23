@@ -134,6 +134,9 @@ class LogicNormal(object):
                       logger.debug("### 파일이동처리 시작 ###")
                       logger.debug("이동할 파일명(폴더) : %s", file)
                       logger.debug("이동할 경로 : %s", moveDir)
+		      #폴더 없으면 생성
+                      if not os.path.isdir(ROOT_PATH+moveDir):
+                         os.makedirs(ROOT_PATH+moveDir)
                       shutil.move(FILE_PATH+file, ROOT_PATH+moveDir+'/'+file)
                       logger.debug("### 파일이동처리 완료 ###")
                    else:
